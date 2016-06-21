@@ -1,5 +1,46 @@
 <resources>
+
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+    
+    <!-- Sizes. -->
+    <dimen name="size_small_24">24dp</dimen>
+    <dimen name="size_normal_56">56dp</dimen>
+    <dimen name="size_large_72">72dp</dimen>
+    
+    <!-- Font sizes. -->
+    <dimen name="font_size_small_12">12sp</dimen>
+    <dimen name="font_size_normal_15">15sp</dimen>
+    <dimen name="font_size_large_18">18sp</dimen>
+    <dimen name="font_size_larger_22">22sp</dimen>
+
+    <!-- Typical sizes of views -->
+    <dimen name="button_height_tall_60">60dp</dimen>
+    <dimen name="button_width_wide_60">60dp</dimen>
+    <dimen name="button_height_normal_40">40dp</dimen>
+    <dimen name="button_width_normal_40">40dp</dimen>
+    <dimen name="button_height_small_32">32dp</dimen>
+    <dimen name="button_wigth_small_32">32dp</dimen>
+
+    <!-- KeyLines and spacing. -->
+    <dimen name="content_with_icon_left_margin">72dp</dimen>
+    <dimen name="status_bar_vertical_spacing">24dp</dimen>
+    <dimen name="toolbar_vertical_spacing">56dp</dimen>
+    <dimen name="subtitle_vertical_spacing">48dp</dimen>
+    <dimen name="list_item_vertical_spacing">72dp</dimen>
+    <dimen name="space_between_content_areas">8dp</dimen>
+    <dimen name="content_left_margin_from_screen_edge">72dp</dimen>
+    <dimen name="right_side_icons_align">32dp</dimen>
+    <dimen name="navigation_right_margin">56dp</dimen>
+
+    <!-- Tipical spaces between two views. -->
+    <dimen name="spacing_huge_40">40dp</dimen>
+    <dimen name="spacing_large_24">24dp</dimen>
+    <dimen name="spacing_normal_14">14dp</dimen>
+    <dimen name="spacing_small_10">10dp</dimen>
+    <dimen name="spacing_tiny_4">4dp</dimen>
+    
+
+
 </resources>
