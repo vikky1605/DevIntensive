@@ -24,20 +24,21 @@
     <dimen name="button_wigth_small_32">32dp</dimen>
 
     <!-- KeyLines and spacing. -->
-    <dimen name="content_with_icon_left_margin">72dp</dimen>
-    <dimen name="status_bar_vertical_spacing">24dp</dimen>
-    <dimen name="toolbar_vertical_spacing">56dp</dimen>
-    <dimen name="subtitle_vertical_spacing">48dp</dimen>
-    <dimen name="list_item_vertical_spacing">72dp</dimen>
-    <dimen name="space_between_content_areas">8dp</dimen>
-    <dimen name="content_left_margin_from_screen_edge">72dp</dimen>
-    <dimen name="right_side_icons_align">32dp</dimen>
-    <dimen name="navigation_right_margin">56dp</dimen>
+    <dimen name="content_with_icon_left_margin_72">72dp</dimen>
+    <dimen name="status_bar_vertical_spacing_24">24dp</dimen>
+    <dimen name="toolbar_vertical_spacing_56">56dp</dimen>
+    <dimen name="subtitle_vertical_spacing_48">48dp</dimen>
+    <dimen name="list_item_vertical_spacing_72">72dp</dimen>
+    <dimen name="space_between_content_areas_8">8dp</dimen>
+    <dimen name="content_left_margin_from_screen_edge_72">72dp</dimen>
+    <dimen name="right_side_icons_align_32">32dp</dimen>
+    <dimen name="navigation_right_margin_56">56dp</dimen>
 
     <!-- Tipical spaces between two views. -->
     <dimen name="spacing_huge_40">40dp</dimen>
-    <dimen name="spacing_large_24">24dp</dimen>
-    <dimen name="spacing_normal_14">14dp</dimen>
+    <dimen name="spacing_large_32">32dp</dimen>
+    <dimen name="spacing_medium_24">24dp</dimen>
+    <dimen name="spacing_normal_16">16dp</dimen>
     <dimen name="spacing_small_10">10dp</dimen>
     <dimen name="spacing_tiny_4">4dp</dimen>
     
