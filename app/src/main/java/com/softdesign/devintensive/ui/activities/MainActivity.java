@@ -1,6 +1,7 @@
 package com.softdesign.devintensive.ui.activities;
 
 import android.support.v7.app.AppCompatActivity;
+import android.support.v4.widget.NestedScrollView;
 import android.os.Bundle;
 import android.util.Log;
 
