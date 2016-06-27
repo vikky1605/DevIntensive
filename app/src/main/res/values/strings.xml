@@ -1,3 +1,17 @@
 <resources>
-    <string name="app_name">devintensive</string>
+    <string name="app_name">Большакова Виктория</string>
+    <string name="phone_number">9506157777</string>
+    <string name="phone">Мобильный телефон</string>
+    <string name="my_mail">vikky1605@gmail.com</string>
+    <string name="e_mail">E-mail</string>
+    <string name="profile_vk">Профиль в VK</string>
+    <string name="id_vk">vk.com/vikky1605</string>
+    <string name="git_rep">Репозиторий</string>
+    <string name="rep_name">github.com/vikky1605/DevIntensive</string>
+    <string name="about_my">О себе</string>
+    <string name="my">Пусть расскажут мои друзья</string>
+    <string name="number">5</string>
+    <string name="range">Рейтинг</string>
+    <string name="projects_number">Проектов</string>
+    <string name="code_lines_number">Написано строк кода</string>
 </resources>
