@@ -2,12 +2,21 @@
 
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/color_primary</item>
         <item name="colorPrimaryDark">@color/color_primary_dark</item>
         <item name="colorAccent">@color/color_accent</item>
     </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent = "ThemeOverlay.AppCompat.Dark.ActionBar"></style>
+
+    <style name="AppTheme.PopupOverLay" parent = "ThemeOverlay.AppCompat.Light"></style>
 
     <style name="icon">
         <item name="android:layout_width">@dimen/size_small_24</item>
@@ -54,11 +63,11 @@
     <style name="editText">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:enabled">false</item>
-        <item name="android:focusable">false</item>
+        <item name="android:enabled">true</item>
+        <item name="android:focusable">true</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:fontFamily">sans-serif-condensed</item>
-        <item name="android:textSize">@dimen/font_size_larger_22</item>
+        <item name="android:textSize">@dimen/font_size_normal_15</item>
     </style>
 
     <style name="textView">
@@ -92,9 +101,8 @@
         <item name="android:background">@color/grey_light</item>
     </style>
 
-
-
-
-
+    <style name="custom_dialog">
+        <item name="android:fullDark">@android:color/transparent</item>
+    </style>
 
 </resources>
