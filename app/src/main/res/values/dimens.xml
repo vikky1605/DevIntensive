@@ -44,6 +44,7 @@
     <dimen name="spacing_small_10">10dp</dimen>
     <dimen name="spacing_tiny_4">4dp</dimen>
     
-
+    <dimen name="profile_image_size">256dp</dimen>
+    <dimen name="float_button_spacing">16dp</dimen>
 
 </resources>
