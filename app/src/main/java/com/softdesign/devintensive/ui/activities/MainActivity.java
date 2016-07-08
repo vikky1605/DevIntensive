@@ -305,7 +305,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         if (mode == 1) {
             showProfilePlaceholder();
             lookToolbar();
-            mCollapsingToolbar.setCollapsedTitleTextColor(Color.TRANSPARENT);
+            mCollapsingToolbar.setExpandedTitleColor(Color.TRANSPARENT);
             mFab.setImageResource(R.drawable.ic_done_black_24dp);
             for (EditText userValue : mUserInfoViews) {
                 userValue.setEnabled(true);
@@ -342,8 +342,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 mFab.setImageResource(R.drawable.ic_create_black_24dp);
                 saveUserInfoValue();
                 hideProfilePlaceholder();
+                mCollapsingToolbar.setExpandedTitleColor(getResources().getColor(R.color.white));
                 unLookToolbar();
-                mCollapsingToolbar.setCollapsedTitleTextColor(getResources().getColor(R.color.white));
             }
             else mCurrentEditMode = 1;
         }
