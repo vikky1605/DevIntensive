@@ -34,7 +34,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.softdesign.devintensive.R;
 import com.softdesign.devintensive.data.managers.DataManager;
@@ -42,6 +42,7 @@ import com.softdesign.devintensive.utils.CircleImageView;
 import com.softdesign.devintensive.utils.ConstantManager;
 import com.softdesign.devintensive.utils.MyTextWatcher;
 import com.softdesign.devintensive.utils.TransformAndCrop;
+import com.softdesign.devintensive.utils.TransformToCircle;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -65,6 +66,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private Uri mSelectedImage = null;
     private boolean mCheckOpenNavigationDrawer = false; // true, если NavigationDrawer открыт, false - если закрыт
     private ImageView mAvatar;
+    private TextView mDrawerName;
+    private TextView mDrawerMail;
     private MyTextWatcher mPhoneTextWatcher, mMailTextWatcher, mVkTextWatcher, mGitTextWatcher;
 
     @BindView(R.id.main_coordinator_container)CoordinatorLayout mCoordinatorLayout;
@@ -84,6 +87,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     @BindView(R.id.to_send_mail)ImageView mToSendMailImage;
     @BindView(R.id.to_profile_VK)ImageView mToProfileVkImage;
     @BindView(R.id.to_user_git)ImageView mToUserGitImage;
+    @BindView(R.id.rating_value)TextView mUserValueRating;
+    @BindView(R.id.code_lines_value)TextView mUserValueCodeLines;
+    @BindView(R.id.projects_value)TextView mUserValueProjects;
+    private List<TextView> mUserValueViews;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,8 +109,16 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         mUserInfoViews.add(mUserGit);
         mUserInfoViews.add(mUserBio);
 
+        mUserValueViews = new ArrayList<>();
+        mUserValueViews.add(mUserValueRating);
+        mUserValueViews.add(mUserValueCodeLines);
+        mUserValueViews.add(mUserValueProjects);
+
         setupToolBar();
         setupDrawer();
+        initUserFields();
+        initUserInfoValue();
+
 
         // загружаем сохраненное фото пользователя, если таковое имеется
         Picasso.with(this)
@@ -136,7 +151,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         } else {
             mCurrentEditMode = savedInstanceState.getInt(ConstantManager.EDIT_MODE_KEY, 0);
             changeEditMode(mCurrentEditMode);
-            loadUserInfoValue();
+
         }
     }
 
@@ -155,7 +170,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     @Override
     protected void onPause() {
         super.onPause();
-        saveUserInfoValue();
+        saveUserFields();
         Log.d(TAG, "onPause");
     }
 
@@ -258,12 +273,20 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     // загружаем ресурсы NavigationDrawer и скрываем его при нажатии на пункты его меню
     private void setupDrawer() {
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
-        Resources res = this.getResources();
-        Bitmap bitmap = BitmapFactory.decodeResource(res, R.drawable.my_photo);
-        bitmap = CircleImageView.getCircleMaskedBitmap(bitmap, 24);
         View view = navigationView.getHeaderView(0);
         mAvatar = (ImageView) view.findViewById(R.id.avatar);
-        mAvatar.setImageBitmap(bitmap);
+
+        Picasso.with(this)
+                .load(mDataManager.getPreferencesManager().loadUserAvatar())
+                .placeholder(R.drawable.user_bg)
+                .transform(new TransformToCircle())
+                .into(mAvatar);
+
+        mDrawerName = (TextView) view.findViewById(R.id.user_name_txt);
+        mDrawerMail = (TextView) view.findViewById(R.id.user_email_txt);
+        List<String> userDrawerInfo = mDataManager.getPreferencesManager().loadUserDrawerInfo();
+        mDrawerMail.setText(userDrawerInfo.get(0) + " " + userDrawerInfo.get(1));
+        mDrawerMail.setText(userDrawerInfo.get(2));
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -340,7 +363,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                     userValue.setFocusableInTouchMode(false);
                 }
                 mFab.setImageResource(R.drawable.ic_create_black_24dp);
-                saveUserInfoValue();
+                saveUserFields();
                 hideProfilePlaceholder();
                 mCollapsingToolbar.setExpandedTitleColor(getResources().getColor(R.color.white));
                 unLookToolbar();
@@ -350,7 +373,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     }
 
    // загружаем сохраненные данные пользователя из SharedPreferences
-    private void loadUserInfoValue() {
+    private void initUserFields() {
         List<String> userData = mDataManager.getPreferencesManager().loadUserProfileDate();
         for (int i = 0; i < userData.size(); i++) {
             mUserInfoViews.get(i).setText(userData.get(i));
@@ -358,17 +381,19 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     }
 
    // сохраняем введенные данные пользователя в SharedPreferences
-    private void saveUserInfoValue() {
+    private void saveUserFields() {
         List<String> userData = new ArrayList<>();
-        for (EditText useFieldView : mUserInfoViews) {
-            userData.add(useFieldView.getText().toString());
+        for (EditText userFieldView : mUserInfoViews) {
+            userData.add(userFieldView.getText().toString());
         }
         mDataManager.getPreferencesManager().saveUserProfileDate(userData);
     }
 
-    // метод для показа SnackBar
-    public void showSnackBar(String message) {
-        Snackbar.make(mCoordinatorLayout, message, Snackbar.LENGTH_LONG).show();
+    private void initUserInfoValue() {
+        List <String> userData = mDataManager.getPreferencesManager().loadUserProfileValue();
+        for (int i = 0; i < userData.size(); i++) {
+            mUserValueViews.get(i).setText(userData.get(i));
+        }
     }
 
     @Override
@@ -579,7 +604,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         startActivity(intent);
     }
 
+    // метод для показа SnackBar
+    public void showSnackBar(String message) {
+        Snackbar.make(mCoordinatorLayout, message, Snackbar.LENGTH_LONG).show();
+    }
 
 }
+
 
 

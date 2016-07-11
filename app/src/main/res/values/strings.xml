@@ -21,13 +21,17 @@
     <string name="user_profile_dialog_cancel">Отмена</string>
     <string name="user_profile_dialog_title">Изменить фотографию профиля</string>
     <string name="user_profile_choose_message">выберите фото</string>
-    <string name="top_enter">ВОЙТИ</string>
-    <string name="password">Пароль</string>
+    <string name="top_enter">войти</string>
+    <string name="password">Введите пароль</string>
     <string name="forget_password">Забыли пароль?</string>
     <string name="check_phone_false">Номер телефона введен неверно</string>
     <string name="check_mail_false">e-mail введен неверно</string>
     <string name="check_vk_false">профиль в контакте введен неверно</string>
     <string name="check_git_false">ссылка на репозиторий github указана неверно</string>
+    <string name="enter_mail">Введите e-mail</string>
+    
+    <string name="ff_regular">sans-serif</string>
+    <string name="ff_medium">sans-serif-medium</string>
 
 
 </resources>
