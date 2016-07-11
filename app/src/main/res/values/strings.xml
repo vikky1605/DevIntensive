@@ -1,18 +1,33 @@
 <resources>
     <string name="app_name">Большакова Виктория</string>
     <string name="my_name">Большакова Виктория</string>
-    <string name="phone_number">9506157777</string>
+    <string name="phone_number">+0 000 000-00-00</string>
     <string name="phone">Мобильный телефон</string>
-    <string name="my_mail">vikky1605@gmail.com</string>
+    <string name="my_mail">XXXX@XXXX.XXX</string>
     <string name="e_mail">E-mail</string>
     <string name="profile_vk">Профиль в VK</string>
-    <string name="id_vk">vk.com/vikky1605</string>
+    <string name="id_vk">vk.com/XXX</string>
     <string name="git_rep">Репозиторий</string>
-    <string name="rep_name">github.com/vikky1605/DevIntensive</string>
+    <string name="rep_name">github.com/XXX</string>
     <string name="about_my">О себе</string>
     <string name="my">Вместо тысячи слов...</string>
     <string name="number">5</string>
     <string name="range">Рейтинг</string>
     <string name="projects_number">Проектов</string>
     <string name="code_lines_number">Написано строк кода</string>
+    <string name="user_profile.placeholder.image">Изменить фотографию профиля</string>
+    <string name="user_profile_dialog_gallery">Загрузить из галереи</string>
+    <string name="user_profile_dialog_camera">Сделать снимок</string>
+    <string name="user_profile_dialog_cancel">Отмена</string>
+    <string name="user_profile_dialog_title">Изменить фотографию профиля</string>
+    <string name="user_profile_choose_message">выберите фото</string>
+    <string name="top_enter">ВОЙТИ</string>
+    <string name="password">Пароль</string>
+    <string name="forget_password">Забыли пароль?</string>
+    <string name="check_phone_false">Номер телефона введен неверно</string>
+    <string name="check_mail_false">e-mail введен неверно</string>
+    <string name="check_vk_false">профиль в контакте введен неверно</string>
+    <string name="check_git_false">ссылка на репозиторий github указана неверно</string>
+
+
 </resources>

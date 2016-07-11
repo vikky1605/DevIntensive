@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_bg">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/grey_light"
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Отправить e-mail"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/spacing_small_8"
+                android:textSize="@dimen/font_large_20"
+                android:textColor="@color/black"
+                />
+
+        <EditText
+            android:id="@+id/mail_subject"
+            style="@style/editText_send_mail"
+            android:text="Тема сообщения"
+            android:hint="Введите тему сообщения"
+            />
+
+            <EditText
+                android:id="@+id/mail_text"
+                style="@style/editText_send_mail"
+                android:text="Teкст сообщения"
+                android:hint="Введите текст сообщения"
+                />
+
+        <Button
+            android:id="@+id/button_send_mail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/spacing_small_8"
+            android:background="@color/color_accent"
+            android:text="Отправить"
+            />
+
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

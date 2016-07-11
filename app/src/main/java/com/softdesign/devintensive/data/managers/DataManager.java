@@ -19,7 +19,7 @@ public class DataManager {
         return INSTANCE;
     }
 
-    public PreferencesManager getmPreferencesManager() {
+    public PreferencesManager getPreferencesManager() {
         return mPreferencesManager;
     }
 }

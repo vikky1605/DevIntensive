@@ -5,46 +5,30 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     
     <!-- Sizes. -->
+    <dimen name="line_size_2">2dp</dimen>
     <dimen name="size_small_24">24dp</dimen>
     <dimen name="size_normal_56">56dp</dimen>
-    <dimen name="size_large_72">72dp</dimen>
-    <dimen name="line_size_2">2dp</dimen>
-    <dimen name="null_size_0">0dp</dimen>
-    
-    <!-- Font sizes. -->
-    <dimen name="font_size_small_12">12sp</dimen>
-    <dimen name="font_size_normal_15">15sp</dimen>
-    <dimen name="font_size_large_18">18sp</dimen>
-    <dimen name="font_size_larger_22">22sp</dimen>
+    <dimen name="size_medium_60">60dp</dimen>
+    <dimen name="size_large_90">90dp</dimen>
+    <dimen name="size_huge_256">256dp</dimen>
+    <dimen name="size_hugest_512">512dp</dimen>
 
-    <!-- Typical sizes of views -->
-    <dimen name="button_height_tall_60">60dp</dimen>
-    <dimen name="button_width_wide_60">60dp</dimen>
-    <dimen name="button_height_normal_40">40dp</dimen>
-    <dimen name="button_width_normal_40">40dp</dimen>
-    <dimen name="button_height_small_32">32dp</dimen>
-    <dimen name="button_wigth_small_32">32dp</dimen>
-
-    <!-- KeyLines and spacing. -->
-    <dimen name="content_with_icon_left_margin_72">72dp</dimen>
-    <dimen name="status_bar_vertical_spacing_24">24dp</dimen>
-    <dimen name="toolbar_vertical_spacing_56">56dp</dimen>
-    <dimen name="subtitle_vertical_spacing_48">48dp</dimen>
-    <dimen name="list_item_vertical_spacing_72">72dp</dimen>
-    <dimen name="space_between_content_areas_8">8dp</dimen>
-    <dimen name="content_left_margin_from_screen_edge_72">72dp</dimen>
-    <dimen name="right_side_icons_align_32">32dp</dimen>
-    <dimen name="navigation_right_margin_56">56dp</dimen>
-
-    <!-- Tipical spaces between two views. -->
-    <dimen name="spacing_huge_40">40dp</dimen>
-    <dimen name="spacing_large_32">32dp</dimen>
-    <dimen name="spacing_medium_24">24dp</dimen>
+    <!-- Tipical spacing. -->
+    <dimen name="spacing_small_8">8dp</dimen>
     <dimen name="spacing_normal_16">16dp</dimen>
-    <dimen name="spacing_small_10">10dp</dimen>
-    <dimen name="spacing_tiny_4">4dp</dimen>
-    
+    <dimen name="spacing_medium_24">24dp</dimen>
+    <dimen name="spacing_medial_28">28dp</dimen>
+    <dimen name="spacing_large_32">32dp</dimen>
+    <dimen name="spacing_larger_56">56dp</dimen>
+    <dimen name="spacing_huge_72">72dp</dimen>
+
+    <!-- Font sizes. -->
+    <dimen name="font_normal_14">14sp</dimen>
+    <dimen name="font_large_20">20sp</dimen>
+
+
     <dimen name="profile_image_size">256dp</dimen>
     <dimen name="float_button_spacing">16dp</dimen>
+    <dimen name="placeholder_photo_size_90">90dp</dimen>
 
 </resources>
