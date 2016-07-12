@@ -20,7 +20,6 @@ public class TransformToCircle implements Transformation {
         if (source == null) {
             return null;
         }
-
         Context context = DevintensiveApplication.getContext();
         Resources res = context.getResources();
         int radius = res.getDimensionPixelOffset(R.dimen.size_small_24);
@@ -38,11 +37,9 @@ public class TransformToCircle implements Transformation {
         if (targetBitmap != source) {
             source.recycle();
         }
-
         return targetBitmap;
 
     }
-
     @Override
     public String key() {
         return "circle";

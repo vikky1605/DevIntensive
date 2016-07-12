@@ -1,8 +1,6 @@
 package com.softdesign.devintensive.ui.activities;
 
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -20,7 +18,6 @@ import com.softdesign.devintensive.data.network.res.UserModelRes;
 import com.softdesign.devintensive.utils.NetworkStatusChecker;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -28,11 +25,7 @@ import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
-/**
- * Created by bolshakova on 10.07.2016.
- */
 public class AuthActivity extends BaseActivity implements View.OnClickListener{
 
     @BindView(R.id.button_in)Button mSignIn;
@@ -109,7 +102,7 @@ public class AuthActivity extends BaseActivity implements View.OnClickListener{
 
                 @Override
                 public void onFailure(Call<UserModelRes> call, Throwable t) {
-                    // TODO 10.07.2016 обработать ошибки ретрофита
+                    showSnackbar("ошибка отправки запроса серверу");
                 }
             });
         } else showSnackbar("Сеть недоступна, попробуйте позже");

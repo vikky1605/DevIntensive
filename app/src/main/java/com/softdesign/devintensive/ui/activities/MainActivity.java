@@ -5,9 +5,6 @@ import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Environment;
@@ -38,9 +35,11 @@ import android.widget.TextView;
 
 import com.softdesign.devintensive.R;
 import com.softdesign.devintensive.data.managers.DataManager;
-import com.softdesign.devintensive.utils.CircleImageView;
+import com.softdesign.devintensive.data.network.res.UploadPhotoRes;
 import com.softdesign.devintensive.utils.ConstantManager;
+import com.softdesign.devintensive.utils.FileUtils;
 import com.softdesign.devintensive.utils.MyTextWatcher;
+import com.softdesign.devintensive.utils.NetworkStatusChecker;
 import com.softdesign.devintensive.utils.TransformAndCrop;
 import com.softdesign.devintensive.utils.TransformToCircle;
 import com.squareup.picasso.Picasso;
@@ -54,6 +53,12 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {
 
@@ -70,26 +75,46 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private TextView mDrawerMail;
     private MyTextWatcher mPhoneTextWatcher, mMailTextWatcher, mVkTextWatcher, mGitTextWatcher;
 
-    @BindView(R.id.main_coordinator_container)CoordinatorLayout mCoordinatorLayout;
-    @BindView(R.id.toolbar)Toolbar mToolBar;
-    @BindView(R.id.navigation_drawer)DrawerLayout mNavigationDrawer;
-    @BindView(R.id.user_phone)EditText mUserPhone;
-    @BindView(R.id.user_mail)EditText mUserMail;
-    @BindView(R.id.user_profile_vk)EditText mUserVk;
-    @BindView(R.id.user_git)EditText mUserGit;
-    @BindView(R.id.user_info)EditText mUserBio;
-    @BindView(R.id.profile_placeholder)RelativeLayout mProfilePlaceholder;
-    @BindView(R.id.collapsing_toolbar)CollapsingToolbarLayout mCollapsingToolbar;
-    @BindView(R.id.appbar_layout)AppBarLayout mAppBarLayout;
-    @BindView(R.id.user_photo_img)ImageView mProfileImage;
-    @BindView(R.id.fab)FloatingActionButton mFab;
-    @BindView(R.id.to_call)ImageView mToCallImage;
-    @BindView(R.id.to_send_mail)ImageView mToSendMailImage;
-    @BindView(R.id.to_profile_VK)ImageView mToProfileVkImage;
-    @BindView(R.id.to_user_git)ImageView mToUserGitImage;
-    @BindView(R.id.rating_value)TextView mUserValueRating;
-    @BindView(R.id.code_lines_value)TextView mUserValueCodeLines;
-    @BindView(R.id.projects_value)TextView mUserValueProjects;
+    @BindView(R.id.main_coordinator_container)
+    CoordinatorLayout mCoordinatorLayout;
+    @BindView(R.id.toolbar)
+    Toolbar mToolBar;
+    @BindView(R.id.navigation_drawer)
+    DrawerLayout mNavigationDrawer;
+    @BindView(R.id.user_phone)
+    EditText mUserPhone;
+    @BindView(R.id.user_mail)
+    EditText mUserMail;
+    @BindView(R.id.user_profile_vk)
+    EditText mUserVk;
+    @BindView(R.id.user_git)
+    EditText mUserGit;
+    @BindView(R.id.user_info)
+    EditText mUserBio;
+    @BindView(R.id.profile_placeholder)
+    RelativeLayout mProfilePlaceholder;
+    @BindView(R.id.collapsing_toolbar)
+    CollapsingToolbarLayout mCollapsingToolbar;
+    @BindView(R.id.appbar_layout)
+    AppBarLayout mAppBarLayout;
+    @BindView(R.id.user_photo_img)
+    ImageView mProfileImage;
+    @BindView(R.id.fab)
+    FloatingActionButton mFab;
+    @BindView(R.id.to_call)
+    ImageView mToCallImage;
+    @BindView(R.id.to_send_mail)
+    ImageView mToSendMailImage;
+    @BindView(R.id.to_profile_VK)
+    ImageView mToProfileVkImage;
+    @BindView(R.id.to_user_git)
+    ImageView mToUserGitImage;
+    @BindView(R.id.rating_value)
+    TextView mUserValueRating;
+    @BindView(R.id.code_lines_value)
+    TextView mUserValueCodeLines;
+    @BindView(R.id.projects_value)
+    TextView mUserValueProjects;
     private List<TextView> mUserValueViews;
 
     @Override
@@ -127,7 +152,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 .transform(new TransformAndCrop())
                 .into(mProfileImage);
 
-       // устанавливаем необходимых слушателей на view
+        // устанавливаем необходимых слушателей на view
         mProfilePlaceholder.setOnClickListener(this);
         mFab.setOnClickListener(this);
         mToCallImage.setOnClickListener(this);
@@ -246,7 +271,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         outState.putInt(ConstantManager.EDIT_MODE_KEY, mCurrentEditMode);
     }
 
-     // загружаем ToolBar
+    // загружаем ToolBar
     private void setupToolBar() {
 
         setSupportActionBar(mToolBar);
@@ -335,10 +360,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 userValue.setFocusable(true);
                 userValue.setFocusableInTouchMode(true);
             }
-           mUserPhone.requestFocus(0);
-           mUserPhone.setSelection(0);
-           }
-        else {
+            mUserPhone.requestFocus(0);
+            mUserPhone.setSelection(0);
+        } else {
             boolean check = true;
             if (!mPhoneTextWatcher.getCheckMask()) {
                 showSnackBar(getString(R.string.check_phone_false));
@@ -352,7 +376,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 showSnackBar(getString(R.string.check_vk_false));
                 check = false;
             }
-            if (!mGitTextWatcher.getCheckMask())  {
+            if (!mGitTextWatcher.getCheckMask()) {
                 showSnackBar(getString(R.string.check_git_false));
                 check = false;
             }
@@ -367,12 +391,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 hideProfilePlaceholder();
                 mCollapsingToolbar.setExpandedTitleColor(getResources().getColor(R.color.white));
                 unLookToolbar();
-            }
-            else mCurrentEditMode = 1;
+            } else mCurrentEditMode = 1;
         }
     }
 
-   // загружаем сохраненные данные пользователя из SharedPreferences
+    // загружаем сохраненные данные пользователя из SharedPreferences
     private void initUserFields() {
         List<String> userData = mDataManager.getPreferencesManager().loadUserProfileDate();
         for (int i = 0; i < userData.size(); i++) {
@@ -380,7 +403,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         }
     }
 
-   // сохраняем введенные данные пользователя в SharedPreferences
+    // сохраняем введенные данные пользователя в SharedPreferences
     private void saveUserFields() {
         List<String> userData = new ArrayList<>();
         for (EditText userFieldView : mUserInfoViews) {
@@ -390,7 +413,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     }
 
     private void initUserInfoValue() {
-        List <String> userData = mDataManager.getPreferencesManager().loadUserProfileValue();
+        List<String> userData = mDataManager.getPreferencesManager().loadUserProfileValue();
         for (int i = 0; i < userData.size(); i++) {
             mUserValueViews.get(i).setText(userData.get(i));
         }
@@ -462,7 +485,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             if (grantResults[1] == PackageManager.PERMISSION_GRANTED) {
                 loadPhotoFromGallery();
             }
-            if (requestCode == ConstantManager.CALL_REQUEST_PERMISSION_CODE && grantResults.length ==1) {
+            if (requestCode == ConstantManager.CALL_REQUEST_PERMISSION_CODE && grantResults.length == 1) {
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED)
                     makeCall();
             }
@@ -556,8 +579,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 .transform(new TransformAndCrop())
                 .into(mProfileImage);
 
-
         mDataManager.getPreferencesManager().saveUserPhoto(selectedImage);
+        updateUserPhoto(selectedImage);
 
     }
 
@@ -598,7 +621,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     }
 
     // переходим по ссылке (профиль в VK или репо на github
-    protected void moveToAdress (String adress) {
+    protected void moveToAdress(String adress) {
         Uri uriAdress = Uri.parse(adress);
         Intent intent = new Intent(Intent.ACTION_VIEW, uriAdress);
         startActivity(intent);
@@ -609,7 +632,39 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         Snackbar.make(mCoordinatorLayout, message, Snackbar.LENGTH_LONG).show();
     }
 
+    // отправляет запрос на сервер для обновления фото пользователя
+    private void updateUserPhoto(Uri image) {
+        if (NetworkStatusChecker.isNetworkAvailable(this)) {
+            File file = new File(FileUtils.getPath(image));
+            RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+            MultipartBody.Part body =
+                    MultipartBody.Part.createFormData("photo", file.getName(), requestFile);
+
+            String userId = mDataManager.getPreferencesManager().getUserId();
+
+            Call<UploadPhotoRes> uploadPhoto = mDataManager.uploadPhoto(
+                    userId, body);
+
+            uploadPhoto.enqueue(new Callback<UploadPhotoRes>() {
+                @Override
+                public void onResponse(Call<UploadPhotoRes> call, Response<UploadPhotoRes> response) {
+                    if (response.code() == 200) {
+                        showSnackBar("Фото профиля успешно обновлено");
+                    } else {
+                        if (response.code() == 404) {
+                            showSnackBar("ошибка доступа к данным профиля");
+                        } else showSnackBar("неизвестная ошибка " + response.code());
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<UploadPhotoRes> call, Throwable t) {
+                    showSnackBar("ошибка отправки запроса серверу");
+                }
+            });
+
+        } else showSnackBar("Сеть недоступна, попробуйте позже");
+    }
+
 }
-
-
 
