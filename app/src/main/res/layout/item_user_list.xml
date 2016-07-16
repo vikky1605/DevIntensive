@@ -23,6 +23,7 @@
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
                 android:scaleType="centerCrop"
+                android:fitsSystemWindows="true"
                 />
             
             <TextView

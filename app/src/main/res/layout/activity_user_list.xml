@@ -24,15 +24,16 @@
             android:layout_height="wrap_content"
             android:background="@color/color_primary"
             >
+
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
-                app:theme="@style/ToolBarStyle"
                 app:popupTheme="@style/AppTheme.PopupOverLay"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin">
 
             </android.support.v7.widget.Toolbar>
+
 
         </android.support.design.widget.AppBarLayout>
 

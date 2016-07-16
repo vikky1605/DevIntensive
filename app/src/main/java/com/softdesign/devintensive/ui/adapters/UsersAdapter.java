@@ -55,7 +55,7 @@ public class UsersAdapter  extends RecyclerView.Adapter<UsersAdapter.UserViewHol
 
         else {Picasso.with(mContext)
                 .load(user.getPublicInfo().getPhoto())
-                .resize(200,0)
+                .resize(512,0)
                 .placeholder(mContext.getResources().getDrawable(R.drawable.user_bg))
                 .error(mContext.getResources().getDrawable(R.drawable.user_bg))
                 .memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE)

@@ -4,20 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/spacing_huge_72">
 
-    <android.support.design.widget.TextInputLayout
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:layout_marginRight="@dimen/spacing_huge_72"
-        android:layout_centerVertical="true">
-
-    <EditText
+     <TextView
         android:id="@+id/user_git"
-        style="@style/editText"
+        style="@style/textView_user_content"
         android:inputType="textUri"
         android:hint="@string/git_rep"
         android:text="@string/rep_name"
+        android:layout_marginRight="@dimen/spacing_huge_72"
+        android:paddingTop="@dimen/spacing_large_32"
+
         />
-    </android.support.design.widget.TextInputLayout>
+
 
     <ImageView
         style="@style/icon.left"

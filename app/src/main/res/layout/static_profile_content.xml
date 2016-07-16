@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<app:android.support.v4.widget.NestedScrollView
+<!--<app:android.support.v4.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    > -->
 
-    >
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-        >
         <LinearLayout
             style="@style/linearLayout">
 
@@ -80,10 +81,6 @@
         <LinearLayout
             style="@style/linearLayout">
 
-            <ImageView
-                style="@style/icon.left"
-                android:src="@drawable/github_circle" />
-
             <ListView
                 android:id="@+id/repositories_list"
                 android:layout_width="match_parent"
@@ -91,11 +88,6 @@
                 android:layout_marginLeft="@dimen/spacing_large_32">
 
             </ListView>
-
-            <ImageView
-                android:id="@+id/to_user_git"
-                style="@style/icon.right"
-                android:src="@drawable/ic_visibility_black_24dp" />
 
         </LinearLayout>
 
@@ -113,20 +105,15 @@
             <LinearLayout
                 style="@style/infoLinearLayout">
 
-                <android.support.design.widget.TextInputLayout
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content">
-                    <EditText
+                  <TextView
                         android:id="@+id/user_info"
-                        style="@style/editText"
-                        android:inputType="textMultiLine"
+                        style="@style/textView_user_content"
                         android:textSize="@dimen/font_normal_14"
                         android:hint="@string/about_my"
                         android:text="@string/my"
                         />
 
-                </android.support.design.widget.TextInputLayout>
-            </LinearLayout>
+                </LinearLayout>
 
 
         </LinearLayout>
@@ -134,6 +121,6 @@
 
     </LinearLayout>
 
-</app:android.support.v4.widget.NestedScrollView>
+<!--</app:android.support.v4.widget.NestedScrollView> -->
 
 

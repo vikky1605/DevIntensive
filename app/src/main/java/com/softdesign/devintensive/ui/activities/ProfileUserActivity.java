@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.ListViewCompat;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -28,7 +29,7 @@ public class ProfileUserActivity extends AppCompatActivity {
 
     private Toolbar mToolbar;
     private ImageView mProfileImage;
-    private EditText mUserBio;
+    private TextView mUserBio;
     private TextView mRating, mCodeLines, mProjects;
     private ListView mRepoListView;
     private CollapsingToolbarLayout mCollapsingToolbar;
@@ -40,11 +41,11 @@ public class ProfileUserActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile_user);
 
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        mProfileImage = (ImageView) findViewById(R.id.photo_placeholder);
+        mProfileImage = (ImageView) findViewById(R.id.user_bg);
         mRating = (TextView) findViewById(R.id.rating_value);
         mCodeLines = (TextView) findViewById(R.id.code_lines_value);
         mProjects = (TextView) findViewById(R.id.projects_value);
-        mUserBio = (EditText) findViewById(R.id.user_info);
+        mUserBio = (TextView) findViewById(R.id.user_info);
         mCollapsingToolbar = (CollapsingToolbarLayout)findViewById(R.id.collapsing_toolbar);
         mCoordinatorLayout = (CoordinatorLayout) findViewById(R.id.main_coordinator_container);
 
