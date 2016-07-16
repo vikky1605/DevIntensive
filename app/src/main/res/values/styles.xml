@@ -128,5 +128,11 @@
         <item name="android:fontFamily">sans-serif</item>
         <item name="android:textSize">@dimen/font_normal_14</item>
     </style>
+    
+    <style name="ToolBarStyle" parent="Theme.AppCompat">
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:textColorSecondary">@color/white</item>
+        <item name="android:actionMenuTextColor">@color/white</item>
+    </style>
 
 </resources>

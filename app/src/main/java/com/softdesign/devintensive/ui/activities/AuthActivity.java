@@ -28,7 +28,7 @@ import retrofit2.Response;
 
 public class AuthActivity extends BaseActivity implements View.OnClickListener{
 
-    @BindView(R.id.button_in)Button mSignIn;
+    Button mSignIn;
     @BindView(R.id.forget_password)TextView mRememberPassword;
     @BindView(R.id.enter_user_mail)EditText mLogin;
     @BindView(R.id.enter_password)EditText mPassword;
@@ -42,6 +42,7 @@ public class AuthActivity extends BaseActivity implements View.OnClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity);
         ButterKnife.bind(this);
+        mSignIn = (Button)findViewById(R.id.button_in);
 
         mDataManager = DataManager.getINSTANCE();
 
@@ -78,7 +79,7 @@ public class AuthActivity extends BaseActivity implements View.OnClickListener{
         mDataManager.getPreferencesManager().saveUserId(userModel.getData().getUser().getId());
         saveUserValues(userModel);
 
-        Intent loginIntent = new Intent(this, MainActivity.class);
+        Intent loginIntent = new Intent(this, UserListActivity.class);
         startActivity(loginIntent);
 
     }
@@ -137,5 +138,6 @@ public class AuthActivity extends BaseActivity implements View.OnClickListener{
 
         mDataManager.getPreferencesManager().saveUserPhoto(Uri.parse(userPhoto));
         mDataManager.getPreferencesManager().saveUserAvatar(Uri.parse(userAvatar));
+
     }
 }

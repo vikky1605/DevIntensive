@@ -18,13 +18,23 @@ public class HeaderInterceptor implements Interceptor {
         PreferencesManager pm = DataManager.getINSTANCE().getPreferencesManager();
 
         Request original = chain.request();
-        Request.Builder requestBuilder = original.newBuilder()
-                        .header("X-Access-Token", pm.getAuthToken())
-                        .header("Request-User-Id", pm.getUserId())
-                        .header("User-Agent", "DevIntensiveApp");
 
-        Request request = requestBuilder.build();
+        if (pm.getAuthToken() == null) {
+            Request.Builder requestBuilder = original.newBuilder();
+            Request request = requestBuilder.build();
+            return chain.proceed(request);
 
-        return chain.proceed(request);
+        } else {
+            Request.Builder requestBuilder = original.newBuilder()
+                    .header("X-Access-Token", pm.getAuthToken())
+                    .header("Request-User-Id", pm.getUserId())
+                    .header("User-Agent", "DevIntensiveApp");
+
+            Request request = requestBuilder.build();
+
+            ;
+
+            return chain.proceed(request);
+        }
     }
 }
