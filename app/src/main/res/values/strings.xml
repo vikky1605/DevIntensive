@@ -29,7 +29,7 @@
     <string name="check_vk_false">профиль в контакте введен неверно</string>
     <string name="check_git_false">ссылка на репозиторий github указана неверно</string>
     <string name="enter_mail">Введите e-mail</string>
-    
+
     <string name="ff_regular">sans-serif</string>
     <string name="ff_medium">sans-serif-medium</string>
 

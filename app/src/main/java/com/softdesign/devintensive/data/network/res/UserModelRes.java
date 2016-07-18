@@ -100,19 +100,9 @@ public class UserModelRes {
 
     public class PublicInfo {
 
-        public String getPhoto() {
-            return photo;
-        }
-
         @SerializedName("bio")
         @Expose
-
         private String bio;
-
-        public String getBio() {
-            return bio;
-        }
-
         @SerializedName("avatar")
         @Expose
         private String avatar;
@@ -123,16 +113,34 @@ public class UserModelRes {
         @Expose
         private String updated;
 
+        public String getPhoto() {
+            return photo;
+        }
+
         public String getAvatar() {
             return avatar;
         }
+
+
+        public String getBio() {
+            return bio;
+        }
     }
+
 
     public class Repo {
 
         @SerializedName("_id")
         @Expose
         private String id;
+
+        @SerializedName("git")
+        @Expose
+
+        private String git;
+        @SerializedName("title")
+        @Expose
+        private String title;
 
         public String getId() {
             return id;
@@ -147,30 +155,20 @@ public class UserModelRes {
             return title;
         }
 
-        @SerializedName("git")
-        @Expose
-
-        private String git;
-        @SerializedName("title")
-        @Expose
-        private String title;
-
-
     }
 
     public class Repositories {
 
-        public List<Repo> getRepo() {
-            return repo;
-        }
 
         @SerializedName("repo")
         @Expose
-
         private List<Repo> repo = new ArrayList<Repo>();
         @SerializedName("updated")
         @Expose
         private String updated;
+        public List<Repo> getRepo() {
+            return repo;
+        }
 
     }
 
@@ -239,6 +237,4 @@ public class UserModelRes {
             return secondName;
         }
     }
-
-
  }
