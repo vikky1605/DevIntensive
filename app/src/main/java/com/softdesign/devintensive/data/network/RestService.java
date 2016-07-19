@@ -28,7 +28,7 @@ public interface RestService {
                               @Part MultipartBody.Part file);
 
     @GET("user/list?orderBy=rating")
-    Call<UserListRes> getUserList();
+    Call<UserListRes> getUserListFromNetwork();
 
 
 }

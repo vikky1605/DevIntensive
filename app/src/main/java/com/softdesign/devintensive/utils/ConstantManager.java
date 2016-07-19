@@ -32,4 +32,5 @@ public interface ConstantManager {
     int CALL_REQUEST_PERMISSION_CODE = 103 ;
 
 
+    int SEARCH_DELAY = 3000;
 }
