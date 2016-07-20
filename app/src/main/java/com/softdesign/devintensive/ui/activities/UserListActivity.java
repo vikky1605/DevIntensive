@@ -1,6 +1,9 @@
 package com.softdesign.devintensive.ui.activities;
 
+import android.app.LoaderManager;
+import android.content.Context;
 import android.content.Intent;
+import android.content.Loader;
 import android.os.Handler;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
@@ -25,12 +28,14 @@ import com.softdesign.devintensive.data.storage.models.User;
 import com.softdesign.devintensive.data.storage.models.UserDTO;
 import com.softdesign.devintensive.ui.adapters.UsersAdapter;
 import com.softdesign.devintensive.utils.ConstantManager;
+import com.softdesign.devintensive.utils.DevintensiveApplication;
+import com.softdesign.devintensive.utils.LoaderDataFromDb;
 
 import java.util.List;
 
 import retrofit2.Call;
 
-public class UserListActivity extends AppCompatActivity {
+public class UserListActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<User>> {
 
     CoordinatorLayout mCoordinatorLayout;
     Toolbar mToolbar;
@@ -44,6 +49,8 @@ public class UserListActivity extends AppCompatActivity {
     private MenuItem mSearchItem;
     private String mQuery;
     private Handler mHandler;
+    private Context mContext;
+    private Loader mLoader;
 
 
     @Override
@@ -67,13 +74,12 @@ public class UserListActivity extends AppCompatActivity {
     }
 
     private void loadUsersFromDb() {
+        Bundle bndl = new Bundle();
+        bndl.putString(ConstantManager.LOADER_KEY, "null");
+        mLoader = getLoaderManager().initLoader(ConstantManager.LOADER_ID, bndl, this);
+        Log.d(TAG, "я тут 0");
+        mLoader.forceLoad();
 
-        if (mDataManager.getUserListFromDb().size() == 0) {
-            showSnackbar("Список пользователей не может быть загружен");
-        } else {
-            // TODO сделать поиск по базе
-            showUsers(mDataManager.getUserListFromDb());
-        }
     }
 
     private void setupToolbar() {
@@ -111,6 +117,15 @@ public class UserListActivity extends AppCompatActivity {
         SearchView searchView = (SearchView) MenuItemCompat.getActionView((mSearchItem));
         searchView.setQueryHint("Введите имя пользователя");
 
+        searchView.setOnCloseListener(new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() {
+                mLoader.cancelLoad();
+                Log.d(TAG, "отказалась от поиска");
+                return false;
+            }
+        });
+
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -130,6 +145,7 @@ public class UserListActivity extends AppCompatActivity {
     }
     public void showUsers (List<User> users) {
         mUsers = users;
+        Log.d(TAG, "я тут 3");
         mUserAdapter = new UsersAdapter(mUsers, new UsersAdapter.UserViewHolder.CustomClickListener() {
             @Override
             public void onUserItemClickListener(int position) {
@@ -143,23 +159,55 @@ public class UserListActivity extends AppCompatActivity {
             }
         });
         mRecyclerView.swapAdapter(mUserAdapter, false);
+        Log.d(TAG, "я тут 4");
     }
 
     private void showUserByQuery (String query) {
-        mQuery = query;
 
+        mQuery = query;
         Runnable searchUsers = new Runnable() {
             @Override
             public void run() {
-                showUsers(mDataManager.getUserListByName(mQuery));
+                Log.d(TAG, "ищу пользователя с именем " + mQuery);
             }
         };
         mHandler.removeCallbacks(searchUsers);
         mHandler.postDelayed(searchUsers, ConstantManager.SEARCH_DELAY);
+        Bundle bndl = new Bundle();
+        bndl.putString(ConstantManager.LOADER_KEY, mQuery);
+        getLoaderManager().destroyLoader(ConstantManager.LOADER_ID);
+        getLoaderManager().destroyLoader(ConstantManager.LOADER_SEARCH_ID);
+        mLoader = getLoaderManager().initLoader(ConstantManager.LOADER_SEARCH_ID, bndl, this);
+        Log.d(TAG, "я загружаю пользователя");
+        mLoader.forceLoad();
+    }
 
+    @Override
+    public Loader<List<User>> onCreateLoader(int id, Bundle args) {
+        Loader <List<User>> loader = null;
+        mContext = DevintensiveApplication.getContext();
+        loader = new LoaderDataFromDb(mContext, args);
+        Log.d(TAG, "я тут 1");
+        return loader;
+    }
+
+    @Override
+    public void onLoaderReset(Loader loader) {
 
     }
 
+    @Override
+    public void onLoadFinished(Loader<List<User>> loader, List<User> users) {
+        mUsers = users;
+        Log.d(TAG, "я тут");
+        if (mUsers == null) {
+            Log.d(TAG, "я тут 00000");
+            showSnackbar("Список пользователей не может быть загружен");
+        } else {
+            Log.d(TAG, "я тут 2");
+            showUsers(mUsers);
+        }
     }
+}
 
 

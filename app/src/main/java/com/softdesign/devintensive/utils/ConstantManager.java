@@ -33,4 +33,8 @@ public interface ConstantManager {
 
 
     int SEARCH_DELAY = 3000;
+    String LOADER_KEY = "LOADER_KEY";
+    int LOADER_ID = 0 ;
+    int LOADER_SEARCH_ID = 1 ;
+    int SPLASH_DISPLAY_LENGTH = 5000 ;
 }
