@@ -21,7 +21,6 @@ import org.greenrobot.greendao.DaoException;
 
 @Entity(active = true, nameInDb = "USERS")
 public class User implements Parcelable{
-    static String CREATOR;
 
     @Id
     private Long id;
@@ -240,11 +239,9 @@ public class User implements Parcelable{
     }
 
 
-    @Generated(hash = 350049784)
-    public User(String CREATOR, Long id, @NotNull String remoteId, String photo,
-            @NotNull String fullName, @NotNull String searchName, int rating, int codeLines,
-            int projects, String bio) {
-        this.CREATOR = CREATOR;
+    @Generated(hash = 1023608416)
+    public User(Long id, @NotNull String remoteId, String photo, @NotNull String fullName,
+            @NotNull String searchName, int rating, int codeLines, int projects, String bio) {
         this.id = id;
         this.remoteId = remoteId;
         this.photo = photo;
@@ -270,11 +267,4 @@ public class User implements Parcelable{
 
     }
 
-    public String getCREATOR() {
-        return this.CREATOR;
-    }
-
-    public void setCREATOR(String CREATOR) {
-        this.CREATOR = CREATOR;
-    }
 }

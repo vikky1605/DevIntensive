@@ -221,6 +221,8 @@ public class UserListActivity extends BaseActivity implements LoaderManager.Load
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(UsersForLoading usersForLoading){
         mUsers = usersForLoading.mUsersList;
+        if (mUsers == null) {Log.d("метка 5", "событие не получено");}
+        else {Log.d("метка 6", "событие получено");}
         showUsers(mUsers);}
     }
 

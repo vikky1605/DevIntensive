@@ -45,8 +45,9 @@ public class SplashActivity extends BaseActivity implements android.app.LoaderMa
             getLoaderManager().destroyLoader(ConstantManager.LOADER_ID);
             mLoader = getLoaderManager().initLoader(ConstantManager.LOADER_ID, bndl, this);
             mLoader.forceLoad();
+            Log.d("метка 1", "запустила лоадер");
 
-            Intent mainIntent = new Intent(SplashActivity.this, UserListActivity.class);
+            Intent mainIntent = new Intent(this, UserListActivity.class);
             startActivity(mainIntent);
         }
     }
@@ -56,11 +57,14 @@ public class SplashActivity extends BaseActivity implements android.app.LoaderMa
         Loader <List<User>> loader = null;
         mContext = DevintensiveApplication.getContext();
         loader = new LoaderDataFromDb(mContext, args);
+        Log.d("метка 2", "создала лоадер");
         return loader;
     }
     @Override
     public void onLoadFinished(Loader<List<User>> loader, List<User> users) {
         mUsers.addAll(users);
+        if (mUsers == null) {Log.d("метка 3", "лоадер отработал с нулем");}
+            else {Log.d("метка 4", "лоадер отработал успешно");}
         mUsersForLoading = new UsersForLoading(mUsers);
         EventBus.getDefault().post(mUsersForLoading);
     }
