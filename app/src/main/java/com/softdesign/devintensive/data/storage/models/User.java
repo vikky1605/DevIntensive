@@ -1,5 +1,9 @@
 package com.softdesign.devintensive.data.storage.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import com.google.gson.annotations.SerializedName;
 import com.softdesign.devintensive.data.network.res.UserListRes;
 
 import org.greenrobot.greendao.annotation.Entity;
@@ -9,13 +13,15 @@ import org.greenrobot.greendao.annotation.NotNull;
 import org.greenrobot.greendao.annotation.ToMany;
 import org.greenrobot.greendao.annotation.Unique;
 
+import java.io.Serializable;
 import java.util.List;
 import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.DaoException;
 
 
 @Entity(active = true, nameInDb = "USERS")
-public class User {
+public class User implements Parcelable{
+    static String CREATOR;
 
     @Id
     private Long id;
@@ -254,6 +260,13 @@ public class User {
     public User() {
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
 
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
 
+    }
 }

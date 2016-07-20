@@ -11,9 +11,7 @@ import com.softdesign.devintensive.R;
 
 import java.util.List;
 
-/**
- * Created by bolshakova on 16.07.2016.
- */
+
 public class RepositoriesAdapter extends BaseAdapter{
 
     private List<String> mRepoList;

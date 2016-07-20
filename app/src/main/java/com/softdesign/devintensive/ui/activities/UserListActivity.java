@@ -11,7 +11,6 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -23,19 +22,24 @@ import android.widget.SearchView;
 
 import com.softdesign.devintensive.R;
 import com.softdesign.devintensive.data.managers.DataManager;
-import com.softdesign.devintensive.data.network.res.UserListRes;
 import com.softdesign.devintensive.data.storage.models.User;
 import com.softdesign.devintensive.data.storage.models.UserDTO;
 import com.softdesign.devintensive.ui.adapters.UsersAdapter;
 import com.softdesign.devintensive.utils.ConstantManager;
 import com.softdesign.devintensive.utils.DevintensiveApplication;
 import com.softdesign.devintensive.utils.LoaderDataFromDb;
+import com.softdesign.devintensive.utils.UsersForLoading;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
 
-public class UserListActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<User>> {
+public class UserListActivity extends BaseActivity implements LoaderManager.LoaderCallbacks<List<User>>  {
 
     CoordinatorLayout mCoordinatorLayout;
     Toolbar mToolbar;
@@ -54,7 +58,7 @@ public class UserListActivity extends AppCompatActivity implements LoaderManager
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_list);
         mRecyclerView = (RecyclerView) findViewById(R.id.user_list);
@@ -67,19 +71,39 @@ public class UserListActivity extends AppCompatActivity implements LoaderManager
         LinearLayoutManager gridLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(gridLayoutManager);
         mHandler = new Handler();
+        mUsers = new ArrayList<>();
 
         setupToolbar();
         setupDrawer();
-        loadUsersFromDb();
+        if (savedInstanceState != null) {
+            int countUsers = savedInstanceState.getInt(ConstantManager.STATE_ITEMS, 0);
+            for (int i = 0; i<countUsers; i++) {
+                String key = String.valueOf(i);
+                User user = savedInstanceState.getParcelable(key);
+                mUsers.add(user);
+                showUsers(mUsers);
+            }
+        }
     }
 
-    private void loadUsersFromDb() {
-        Bundle bndl = new Bundle();
-        bndl.putString(ConstantManager.LOADER_KEY, "null");
-        mLoader = getLoaderManager().initLoader(ConstantManager.LOADER_ID, bndl, this);
-        Log.d(TAG, "я тут 0");
-        mLoader.forceLoad();
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        for (int i = 0; i<mUsers.size(); i++) {
+        outState.putParcelable(String.valueOf(i), mUsers.get(i));}
+        outState.putInt(ConstantManager.STATE_ITEMS, mUsers.size());
     }
 
     private void setupToolbar() {
@@ -89,9 +113,7 @@ public class UserListActivity extends AppCompatActivity implements LoaderManager
         if (actionBar != null) {
             actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_black_24dp);
             actionBar.setDisplayHomeAsUpEnabled(true);
-
         }
-
     }
 
     @Override
@@ -102,8 +124,6 @@ public class UserListActivity extends AppCompatActivity implements LoaderManager
     }
 
     private void setupDrawer () {
-        //  TODO: 14.07.2016  реализовать переход в другую активити
-        // при клике по элементу меню в mNavigationDrawer
 
     }
     public void showSnackbar(String message) {
@@ -121,7 +141,6 @@ public class UserListActivity extends AppCompatActivity implements LoaderManager
             @Override
             public boolean onClose() {
                 mLoader.cancelLoad();
-                Log.d(TAG, "отказалась от поиска");
                 return false;
             }
         });
@@ -134,8 +153,6 @@ public class UserListActivity extends AppCompatActivity implements LoaderManager
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                // TODO поиск вызывать тут
-                Log.d("вы ввели", newText);
                 showUserByQuery(newText);
                 return false;
             }
@@ -145,7 +162,6 @@ public class UserListActivity extends AppCompatActivity implements LoaderManager
     }
     public void showUsers (List<User> users) {
         mUsers = users;
-        Log.d(TAG, "я тут 3");
         mUserAdapter = new UsersAdapter(mUsers, new UsersAdapter.UserViewHolder.CustomClickListener() {
             @Override
             public void onUserItemClickListener(int position) {
@@ -153,13 +169,11 @@ public class UserListActivity extends AppCompatActivity implements LoaderManager
                 Intent profileIntent = new Intent(UserListActivity.this, ProfileUserActivity.class);
                 profileIntent.putExtra(ConstantManager.PARSELABLE_KEY, userDTO);
 
-                Log.d("TAG","пытаюсь перейти в профиль пользователя");
                 startActivity(profileIntent);
 
             }
         });
         mRecyclerView.swapAdapter(mUserAdapter, false);
-        Log.d(TAG, "я тут 4");
     }
 
     private void showUserByQuery (String query) {
@@ -178,7 +192,6 @@ public class UserListActivity extends AppCompatActivity implements LoaderManager
         getLoaderManager().destroyLoader(ConstantManager.LOADER_ID);
         getLoaderManager().destroyLoader(ConstantManager.LOADER_SEARCH_ID);
         mLoader = getLoaderManager().initLoader(ConstantManager.LOADER_SEARCH_ID, bndl, this);
-        Log.d(TAG, "я загружаю пользователя");
         mLoader.forceLoad();
     }
 
@@ -187,7 +200,6 @@ public class UserListActivity extends AppCompatActivity implements LoaderManager
         Loader <List<User>> loader = null;
         mContext = DevintensiveApplication.getContext();
         loader = new LoaderDataFromDb(mContext, args);
-        Log.d(TAG, "я тут 1");
         return loader;
     }
 
@@ -199,15 +211,18 @@ public class UserListActivity extends AppCompatActivity implements LoaderManager
     @Override
     public void onLoadFinished(Loader<List<User>> loader, List<User> users) {
         mUsers = users;
-        Log.d(TAG, "я тут");
         if (mUsers == null) {
-            Log.d(TAG, "я тут 00000");
             showSnackbar("Список пользователей не может быть загружен");
         } else {
-            Log.d(TAG, "я тут 2");
             showUsers(mUsers);
         }
     }
-}
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(UsersForLoading usersForLoading){
+        mUsers = usersForLoading.mUsersList;
+        showUsers(mUsers);}
+    }
+
 
 

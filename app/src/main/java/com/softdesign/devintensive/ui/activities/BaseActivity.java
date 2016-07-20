@@ -3,7 +3,6 @@ package com.softdesign.devintensive.ui.activities;
 import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
@@ -11,9 +10,6 @@ import android.widget.Toast;
 import com.softdesign.devintensive.R;
 import com.softdesign.devintensive.utils.ConstantManager;
 
-/**
- * Created by bolshakova on 25.06.2016.
- */
 public class BaseActivity extends AppCompatActivity {
 
     static final String TAG = ConstantManager.TAG_PREFIX + "BaseActivity";

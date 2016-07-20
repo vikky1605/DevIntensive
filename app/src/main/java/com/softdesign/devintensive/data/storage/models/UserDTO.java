@@ -2,16 +2,9 @@ package com.softdesign.devintensive.data.storage.models;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-
-import com.softdesign.devintensive.data.network.res.UserListRes;
-import com.softdesign.devintensive.data.network.res.UserModelRes;
-
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by bolshakova on 16.07.2016.
- */
 public class UserDTO implements Parcelable {
     private String mPhoto;
     private String mFullName;

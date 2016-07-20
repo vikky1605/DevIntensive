@@ -3,12 +3,9 @@ package com.softdesign.devintensive.data.network;
 import android.content.Context;
 
 import com.jakewharton.picasso.OkHttp3Downloader;
-import com.squareup.picasso.OkHttpDownloader;
 import com.squareup.picasso.Picasso;
 
-/**
- * Created by bolshakova on 17.07.2016.
- */
+
 public class PicassoCache {
     private Context mContext;
     private Picasso mPicassoInstance;
@@ -31,6 +28,5 @@ public class PicassoCache {
         }
 
         return mPicassoInstance;
-
     }
 }

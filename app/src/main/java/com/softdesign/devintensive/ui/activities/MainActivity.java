@@ -665,6 +665,5 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
         } else showSnackBar("Сеть недоступна, попробуйте позже");
     }
-
 }
 

@@ -1,6 +1,5 @@
 package com.softdesign.devintensive.utils;
 
-import android.content.AsyncTaskLoader;
 import android.content.Context;
 import android.content.Loader;
 import android.os.AsyncTask;
@@ -12,21 +11,14 @@ import com.softdesign.devintensive.data.storage.models.User;
 
 import java.util.List;
 
-/**
- * Created by bolshakova on 19.07.2016.
- */
 public class LoaderDataFromDb extends Loader<List<User>> {
-    private DataManager mDataManager;
-    private List<User> mUsers;
+
     private DownloadDataFromDb mDownloadDataFromDb;
     private String mCheckForLoading;
-
-
 
     public LoaderDataFromDb(Context context, Bundle args) {
         super(context);
         mCheckForLoading = args.getString(ConstantManager.LOADER_KEY);
-        Log.d("создала лоадер", mCheckForLoading);
     }
 
     @Override
@@ -46,9 +38,8 @@ public class LoaderDataFromDb extends Loader<List<User>> {
     void getResultFromTask(List<User> users) {
         deliverResult(users);
     }
+
     public class DownloadDataFromDb extends AsyncTask<String, Void, List<User>> {
-
-
         private DataManager mDataManager;
         private List<User> mUsers;
         private String mSearchName;
@@ -59,8 +50,7 @@ public class LoaderDataFromDb extends Loader<List<User>> {
             mDataManager = DataManager.getINSTANCE();
             mSearchName = mCheckForLoading;
             if (mSearchName.equals("null")) {
-                  Log.d("я в лоадере", mCheckForLoading);
-                try {
+                  try {
                     mUsers = mDataManager.getUserListFromDb();
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -82,7 +72,4 @@ public class LoaderDataFromDb extends Loader<List<User>> {
             getResultFromTask(users);
         }
     }
-
-
-
 }

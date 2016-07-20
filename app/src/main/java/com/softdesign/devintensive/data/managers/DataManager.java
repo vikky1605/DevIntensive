@@ -14,20 +14,14 @@ import com.softdesign.devintensive.data.storage.models.User;
 import com.softdesign.devintensive.data.storage.models.UserDao;
 import com.softdesign.devintensive.utils.DevintensiveApplication;
 import com.squareup.picasso.Picasso;
-
-import org.greenrobot.greendao.AbstractDaoSession;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import okhttp3.MultipartBody;
 import retrofit2.Call;
 import retrofit2.http.Part;
 import retrofit2.http.Path;
 
-/**
- * Created by bolshakova on 27.06.2016.
- */
+
 public class DataManager {
 
     private static DataManager INSTANCE = null;
@@ -36,8 +30,6 @@ public class DataManager {
     private Context mContext;
     private Picasso mPicasso;
     private DaoSession mDaoSession;
-
-
 
     public DataManager() {
 
@@ -106,12 +98,10 @@ public class DataManager {
                        .build()
                        .list();
 
-
         }
         catch (Exception e) {
             e.printStackTrace();
         }
         return userList;
     }
-
    }

@@ -26,10 +26,8 @@ import com.softdesign.devintensive.data.storage.models.UserDTO;
 import com.softdesign.devintensive.data.storage.models.UserDao;
 import com.softdesign.devintensive.ui.adapters.UsersAdapter;
 import com.softdesign.devintensive.utils.AppConfig;
-import com.softdesign.devintensive.utils.ConstantManager;
 import com.softdesign.devintensive.utils.NetworkStatusChecker;
 
-import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -198,7 +196,7 @@ public class AuthActivity extends BaseActivity implements View.OnClickListener {
 
             @Override
             public void onFailure(Call<UserListRes> call, Throwable t) {
-                // TODO обработать ошибки
+                showSnackbar("Неизвестная ошибка. Попробуйте позже");
 
             }
         });

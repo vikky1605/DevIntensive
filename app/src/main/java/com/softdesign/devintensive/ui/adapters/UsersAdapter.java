@@ -22,9 +22,6 @@ import com.squareup.picasso.NetworkPolicy;
 
 import java.util.List;
 
-/**
- * Created by bolshakova on 13.07.2016.
- */
 public class UsersAdapter  extends RecyclerView.Adapter<UsersAdapter.UserViewHolder> {
 
     public static final String TAG = ConstantManager.TAG_PREFIX + "UsersAdapter";
@@ -88,7 +85,6 @@ public class UsersAdapter  extends RecyclerView.Adapter<UsersAdapter.UserViewHol
 
                                     }
                                 });
-
 
                     }
                 });

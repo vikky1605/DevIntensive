@@ -1,28 +1,11 @@
 package com.softdesign.devintensive.utils;
 
-import android.content.ContentResolver;
-import android.content.ContentUris;
+
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
-import android.database.DatabaseUtils;
-import android.graphics.Bitmap;
 import android.net.Uri;
-import android.os.Build;
-import android.os.Environment;
-import android.provider.DocumentsContract;
 import android.provider.MediaStore;
-import android.util.Log;
-import android.webkit.MimeTypeMap;
 
-import java.io.File;
-import java.io.FileFilter;
-import java.text.DecimalFormat;
-import java.util.Comparator;
-
-/**
- * Created by bolshakova on 12.07.2016.
- */
 public class FileUtils {
 
     public static String getPath(Uri uri)

@@ -11,9 +11,7 @@ import com.softdesign.devintensive.data.storage.models.DaoSession;
 
 import org.greenrobot.greendao.database.Database;
 
-/**
- * Created by bolshakova on 27.06.2016.
- */
+
 public class DevintensiveApplication extends Application {
 
     public static SharedPreferences sSharedPreferences;

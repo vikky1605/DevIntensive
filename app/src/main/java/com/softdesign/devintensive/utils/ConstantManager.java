@@ -1,8 +1,5 @@
 package com.softdesign.devintensive.utils;
 
-/**
- * Created by bolshakova on 23.06.2016.
- */
 public interface ConstantManager {
     String TAG_PREFIX = "DEV ";
 
@@ -22,19 +19,17 @@ public interface ConstantManager {
     String USER_PROJECTS_VALUE = "USER_PROJECTS_VALUE" ;
     String USER_AVATAR_KEY = "USER_AVATAR_KEY" ;
     String PARSELABLE_KEY = "PARSELABLE_KEY" ;
+    String LOADER_KEY = "LOADER_KEY";
+    String STATE_ITEMS = "STATE_ITEMS" ;
 
     int LOAD_PROFILE_PHOTO = 1;
     int REQUEST_CAMERA_PICTURE = 99;
     int REQUEST_GALLERY_PICTURE = 88;
-
     int PERMISSION_REQUEST_SETTINGS_CODE = 101 ;
     int CAMERA_REQUEST_PERMISSION_CODE = 102;
     int CALL_REQUEST_PERMISSION_CODE = 103 ;
-
-
     int SEARCH_DELAY = 3000;
-    String LOADER_KEY = "LOADER_KEY";
     int LOADER_ID = 0 ;
     int LOADER_SEARCH_ID = 1 ;
-    int SPLASH_DISPLAY_LENGTH = 5000 ;
+
 }
