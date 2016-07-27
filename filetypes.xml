@@ -1,0 +1,8 @@
+<application>
+  <component name="FileTypeManager" version="16">
+    <extensionMap>
+      <mapping pattern="empty" type="XML" />
+      <mapping pattern="slide_from_top" type="XML" />
+    </extensionMap>
+  </component>
+</application>
