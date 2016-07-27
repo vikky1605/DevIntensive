@@ -6,9 +6,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by bolshakova on 10.07.2016.
- */
+
 public class UserModelRes {
     @SerializedName("success")
     @Expose

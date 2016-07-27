@@ -9,9 +9,6 @@ import com.softdesign.devintensive.utils.DevintensiveApplication;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by bolshakova on 27.06.2016.
- */
 public class PreferencesManager {
 
     private SharedPreferences mSharedPreferences;

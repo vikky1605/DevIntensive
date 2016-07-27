@@ -1,8 +1,6 @@
 package com.softdesign.devintensive.data.network.req;
 
-/**
- * Created by bolshakova on 10.07.2016.
- */
+
 public class UserLoginReq {
     private String email;
     private String password;

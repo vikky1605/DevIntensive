@@ -14,9 +14,7 @@ import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.Path;
 
-/**
- * Created by bolshakova on 10.07.2016.
- */
+
 public interface RestService {
 
     @POST("login")
@@ -28,7 +26,7 @@ public interface RestService {
                               @Part MultipartBody.Part file);
 
     @GET("user/list?orderBy=rating")
-    Call<UserListRes> getUserList();
+    Call<UserListRes> getUserListFromNetwork();
 
 
 }

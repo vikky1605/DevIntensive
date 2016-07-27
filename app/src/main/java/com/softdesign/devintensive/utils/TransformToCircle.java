@@ -11,9 +11,6 @@ import android.graphics.Shader;
 import com.softdesign.devintensive.R;
 import com.squareup.picasso.Transformation;
 
-/**
- * Created by bolshakova on 11.07.2016.
- */
 public class TransformToCircle implements Transformation {
     @Override
     public Bitmap transform(Bitmap source) {
